@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """Exit the program when EOF (Ctrl+D) is encountered."""
+        """Exit the program when EOF (Ctrl+D) is encountered"""
         print("")
         return True
 
