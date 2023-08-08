@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 '''A module containing a BaseModel class'''
 
-from datetime import datetime
 import json
+import models
 import uuid
+from datetime import datetime
 
 
 class BaseModel:
@@ -16,6 +17,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.today()
             self.updated_at = self.created_at
+            models.storage.new(self)       # updates __objects var of storage
         else:
             # if dictionary is not none or not empty
             for key, value in kwargs.items():
@@ -34,6 +36,7 @@ class BaseModel:
     def save(self):
         '''Method that updates the updated_at attribute'''
         self.updated_at = datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         '''Returns the key/values of __dict__ of the instance'''

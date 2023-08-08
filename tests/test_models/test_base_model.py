@@ -30,8 +30,7 @@ class TestBase(unittest.TestCase):
         self.assertIsNotNone(self.__doc__)
 
     def test_for_method_docs(self):
-        '''Tests to see if method documentation exists for methods
-        contained in the class'''
+        '''Tests to see if method documentation exists for methods'''
 
         self.assertIsNotNone(self.__init__.__doc__)
         self.assertIsNotNone(BaseModel.save.__doc__)
