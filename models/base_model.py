@@ -31,7 +31,8 @@ class BaseModel:
 
     def __str__(self):
         '''String representation of BaseModel object'''
-        return "[BaseModel] ({}) {}".format(self.id, self.__dict__)
+        var = self.__class__.__name__
+        return "[{}] ({}) {}".format(var, self.id, self.__dict__)
 
     def save(self):
         '''Method that updates the updated_at attribute'''
@@ -40,7 +41,10 @@ class BaseModel:
 
     def to_dict(self):
         '''Returns the key/values of __dict__ of the instance'''
-        self.__dict__["__class__"] = "BaseModel"
-        self.__dict__["created_at"] = self.created_at.isoformat()
-        self.__dict__["updated_at"] = self.updated_at.isoformat()
+        temp = self.__dict__
+        temp["__class__"] = "{}".format(self.__class__.__name__)
+        if isinstance(temp["created_at"], datetime):        
+            temp["created_at"] = self.created_at.isoformat()
+        if isinstance(temp["updated_at"], datetime):
+            temp["updated_at"] = self.updated_at.isoformat()
         return self.__dict__
