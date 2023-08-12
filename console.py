@@ -16,7 +16,8 @@ from models.place import Place
 from models.review import Review
 
 class_dict = {"BaseModel": BaseModel, "User": User, "City": City,
-              "Review": Review, "State": State, "Amenity": Amenity}
+              "Review": Review, "State": State, "Amenity": Amenity,
+              "Place": Place}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -25,12 +26,20 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def emptyline(self):
+        '''Do nothing if no command and/or argument is entered'''
         pass
 
     def default(self, line):
-
-        command_list = ["all", "create", "delete", "show", "update"]
+        '''This method is called if there is no do_(line) method available'''
+        command_list = ["all", "create", "delete", "show", "update", "count"]
         args = cmd_parser(line)
+        
+        # if there is no valid class name in (line) print error message
+        if args == 1:
+            print("*** Unknown syntax: {}".format(line))
+            return False
+
+        # call do_* method based on class name found in (line)
         command = re.split(' ', args, 1)
         if command[0] in command_list:
             if args.startswith(command_list[0]):
@@ -41,14 +50,14 @@ class HBNBCommand(cmd.Cmd):
                 self.do_delete(command[1])
             elif args.startswith(command_list[3]):
                 self.do_show(command[1])
-            else:
+            elif args.startswith(command_list[4]):
                 self.do_update(command[1])
-            return False
-        else:
-            print("** syntax error")
+            else:
+                self.do_count(command[1])
             return False
 
     def do_quit(self, line):
+        '''Do method to exit CLI'''
         sys.exit(0)
 
     def help_quit(self):
@@ -57,6 +66,7 @@ class HBNBCommand(cmd.Cmd):
         print("-- exits program")
 
     def do_EOF(self, line):
+        '''Do method for EOF condition'''
         return True
 
     def help_EOF(self):
@@ -64,6 +74,7 @@ class HBNBCommand(cmd.Cmd):
         print("-- Allows user to exit CLI cleanly")
 
     def do_create(self, args):
+        '''Do method to create a new instance based on class name'''
         cmd_args = args.split()
         if cmd_args == []:
             print("** class name missing **")
@@ -80,6 +91,7 @@ class HBNBCommand(cmd.Cmd):
         print("-- Creates a class object and displays object id")
 
     def do_show(self, args):
+        '''Do method that displays an instance of class'''
         cmd_args = args.split()
         if cmd_args == []:
             print("** class name missing **")
@@ -103,6 +115,7 @@ class HBNBCommand(cmd.Cmd):
         print("-- Prints the string representation of the object")
 
     def do_delete(self, args):
+        '''Do method to delete an instance of class'''
         cmd_args = args.split()
         if cmd_args == []:
             print("** class name missing **")
@@ -126,6 +139,8 @@ class HBNBCommand(cmd.Cmd):
         print("-- Deletes the object")
 
     def do_all(self, args):
+        '''DO method that displays all instances of all classes or all
+        instances of a specified class'''
         models.storage.reload()
         storage = models.storage.all()
         list_objs = []
@@ -150,6 +165,7 @@ class HBNBCommand(cmd.Cmd):
         print("-- Prints a list of all instances or all instances of class")
 
     def do_update(self, args):
+        '''Do method that updates the attribute of an instance of class'''
         cmd_args = args.split()
         storage = models.storage.all()
         if cmd_args == []:
@@ -182,10 +198,22 @@ class HBNBCommand(cmd.Cmd):
         print("-- Updates the object attribute if it exists")
         print("-- Adds new attribute to object if attribute does not exist")
 
+    def do_count(self, arg):
+        '''Counts all instance of class name(arg)'''
+        models.storage.reload()
+        storage = models.storage.all()
+        count = 0
+        for key, value in storage.items():
+            key_list = key.split('.')
+            if key_list[0] == arg:
+                count += 1
+        print(count)                
+
     do_q = do_quit
     do_d = do_delete
 
     def postloop(self):
+        '''Code to run at end of loop'''
         print()
 
 

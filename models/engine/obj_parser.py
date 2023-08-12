@@ -28,4 +28,6 @@ def obj_parser(obj):
             new_obj[key] = Amenity(**value)
         elif value["__class__"] == "Review":
             new_obj[key] = Review(**value)
+        elif value["__class__"] == "Place":
+            new_obj[key] = Place(**value)
     return new_obj
