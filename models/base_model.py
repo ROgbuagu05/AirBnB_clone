@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 '''A module containing a BaseModel class'''
 
-import json
 import models
 import uuid
 from datetime import datetime
@@ -28,7 +27,6 @@ class BaseModel:
             self.created_at = datetime.today()
             self.updated_at = self.created_at
             models.storage.new(self)       # updates __objects var of storage
-            models.storage.reload()
 
     def __str__(self):
         '''String representation of BaseModel object'''
@@ -42,10 +40,10 @@ class BaseModel:
 
     def to_dict(self):
         '''Returns the key/values of __dict__ of the instance'''
-        temp = self.__dict__
+        temp = self.__dict__.copy()
         temp["__class__"] = "{}".format(self.__class__.__name__)
         if isinstance(temp["created_at"], datetime):
             temp["created_at"] = self.created_at.isoformat()
         if isinstance(temp["updated_at"], datetime):
             temp["updated_at"] = self.updated_at.isoformat()
-        return self.__dict__
+        return temp

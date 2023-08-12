@@ -100,7 +100,6 @@ class HBNBCommand(cmd.Cmd):
         elif len(cmd_args) < 2:
             print("** instance id missing **")
         else:
-            models.storage.reload()
             storage = models.storage.all()
             key = "{}.{}".format(cmd_args[0], cmd_args[1])
             if key in storage:
@@ -141,7 +140,6 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         '''DO method that displays all instances of all classes or all
         instances of a specified class'''
-        models.storage.reload()
         storage = models.storage.all()
         list_objs = []
         if args and args not in class_dict:
@@ -200,7 +198,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, arg):
         '''Counts all instance of class name(arg)'''
-        models.storage.reload()
         storage = models.storage.all()
         count = 0
         for key, value in storage.items():
