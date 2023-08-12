@@ -13,12 +13,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         '''Constructor method for BaseModel class'''
 
-        if kwargs == {}:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.today()
-            self.updated_at = self.created_at
-            models.storage.new(self)       # updates __objects var of storage
-        else:
+        if kwargs:
             # if dictionary is not none or not empty
             for key, value in kwargs.items():
                 # exclude __class__ attr
@@ -28,6 +23,11 @@ class BaseModel:
                         self.__setattr__(key, datetime.fromisoformat(value))
                     else:
                         self.__setattr__(key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.today()
+            self.updated_at = self.created_at
+            models.storage.new(self)       # updates __objects var of storage
 
     def __str__(self):
         '''String representation of BaseModel object'''
@@ -43,7 +43,7 @@ class BaseModel:
         '''Returns the key/values of __dict__ of the instance'''
         temp = self.__dict__
         temp["__class__"] = "{}".format(self.__class__.__name__)
-        if isinstance(temp["created_at"], datetime):        
+        if isinstance(temp["created_at"], datetime):
             temp["created_at"] = self.created_at.isoformat()
         if isinstance(temp["updated_at"], datetime):
             temp["updated_at"] = self.updated_at.isoformat()

@@ -2,11 +2,12 @@
 '''A module containing the obj_parser function'''
 from models.base_model import BaseModel
 from models.user import User
-from models.state import State
 from models.city import City
-from models.amenity import Amenity
+from models.state import State
 from models.place import Place
 from models.review import Review
+from models.amenity import Amenity
+
 
 def obj_parser(obj):
     '''Takes in obj which is a dictionary containing the dictionaries
@@ -25,9 +26,6 @@ def obj_parser(obj):
             new_obj[key] = City(**value)
         elif value["__class__"] == "Amenity":
             new_obj[key] = Amenity(**value)
-        elif Value["__class__"] == "Place":
-            new_obj[key] = Place(**value)
-        elif Value["__class__"] == "Review":
+        elif value["__class__"] == "Review":
             new_obj[key] = Review(**value)
-
     return new_obj
