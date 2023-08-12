@@ -13,7 +13,7 @@ class TestBase(unittest.TestCase):
 
         self.one = BaseModel()
         self.two = BaseModel(None)
-        self.three = BaseModel()
+        self.three = BaseModel(89)
         self.three.name = "Kivashan"
         self.three.number = 98
 
@@ -66,3 +66,12 @@ class TestBase(unittest.TestCase):
         self.assertTrue(isinstance(self.one.updated_at, datetime))
         # test created_at and updated_at when instance is created
         self.assertEqual(self.one.created_at, self.one.updated_at)
+
+        # test created_at and updated_at when instance is created and
+        #+ after it is saved
+        original = self.one.created_at
+        original2 = self.one.updated_at
+        self.one.save()
+        self.assertEqual(original, self.one.created_at)
+        self.assertNotEqual(original2, self.one.updated_at)
+        
