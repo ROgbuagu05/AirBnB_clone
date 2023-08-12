@@ -18,7 +18,7 @@ def cmd_parser(arg):
                   "State", "User"]
 
     # Split class name from rest of argument
-    arg_list = re.split('\.', arg, 1)
+    arg_list = arg.split('.')
 
     # if a valid class name is not given, return 1
     if arg_list[0] not in class_list:

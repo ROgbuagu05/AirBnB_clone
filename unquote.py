@@ -15,8 +15,21 @@ def unquote(arg):
         The arg string without double quotation marks at the beginning and
         ending of the string
     '''
-    if arg.startswith('"') and arg.endswith('"'):
+    arg_one = ""
+    arg_two = ""
+    if arg[3].startswith('"') and arg[3].endswith('"'):
         new = re.sub('"', '', arg)
         return new
+    elif arg[3].startswith('"'):
+        arg_one = arg[3]
+        for i in arg[4:]:
+            arg_one += " " + i
+            if '"' in i:
+                break
+        if arg_one.startswith('"') and arg_one.endswith('"'):
+            new = re.sub('"', '', arg_one)
+            return new
+        else:
+            return arg[3]
     else:
         return arg

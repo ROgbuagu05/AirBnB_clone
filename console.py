@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         '''This method is called if there is no do_(line) method available'''
         command_list = ["all", "create", "delete", "show", "update", "count"]
         args = cmd_parser(line)
-        
+
         # if there is no valid class name in (line) print error message
         if args == 1:
             print("*** Unknown syntax: {}".format(line))
@@ -182,7 +182,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
         else:
             key = "{}.{}".format(cmd_args[0], cmd_args[1])
-            new_arg = unquote(cmd_args[3])
+            new_arg = unquote(cmd_args)
             instance = storage[key].__dict__
             if cmd_args[2] in instance:
                 valtype = type(instance[cmd_args[2]])
@@ -207,7 +207,7 @@ class HBNBCommand(cmd.Cmd):
             key_list = key.split('.')
             if key_list[0] == arg:
                 count += 1
-        print(count)                
+        print(count)
 
     do_q = do_quit
     do_d = do_delete

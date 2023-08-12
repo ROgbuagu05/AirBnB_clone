@@ -28,6 +28,7 @@ class BaseModel:
             self.created_at = datetime.today()
             self.updated_at = self.created_at
             models.storage.new(self)       # updates __objects var of storage
+            models.storage.reload()
 
     def __str__(self):
         '''String representation of BaseModel object'''
