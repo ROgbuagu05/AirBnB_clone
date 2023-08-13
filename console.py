@@ -55,7 +55,10 @@ class HBNBCommand(cmd.Cmd):
                     self.do_update(command[1])
                 elif command[0] == command_list[5]:
                     self.do_count(command[1])
-            # else:
+            return False
+    
+        super().default(line)
+        # else:
                 # print("*** Unknown syntax: {}".format(line))
         # else:
             # print("*** Unknown syntax: {}".format(line))
