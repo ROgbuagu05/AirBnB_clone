@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         print("-- eg. show BaseModel 1234-1234-1234")
         print("-- Prints the string representation of the object")
 
-    def do_delete(self, args):
+    def do_destroy(self, args):
         '''Do method to delete an instance of class'''
         cmd_args = args.split()
         if cmd_args == []:
@@ -138,9 +138,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def help_delete(self):
-        print("Usage: delete <class name> <obj.id>")
-        print("-- eg. delete BaseModel 1234-1234-1234")
+    def help_destroy(self):
+        print("Usage: destroy <class name> <obj.id>")
+        print("-- eg. destroy BaseModel 1234-1234-1234")
         print("-- eg. d Basemodel 1234-1234-1234(alternative)")
         print("-- Deletes the object")
 
@@ -214,12 +214,11 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     do_q = do_quit
-    do_d = do_delete
+    do_d = do_destroy
 
     def postloop(self):
         '''Code to run at end of loop'''
         print()
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
