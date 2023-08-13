@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         '''This method is called if there is no do_(line) method available'''
-        command_list = ["all", "create", "delete", "show", "update", "count"]
+        command_list = ["all", "create", "destroy", "show", "update", "count"]
         args = cmd_parser(line)
 
         # if there is no valid class name in (line) print error message
@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
                 elif command[0] == command_list[1]:
                     self.do_create(command[1])
                 elif command[0] == command_list[2]:
-                    self.do_delete(command[1])
+                    self.do_destroy(command[1])
                 elif command[0] == command_list[3]:
                     self.do_show(command[1])
                 elif command[0] == command_list[4]:
