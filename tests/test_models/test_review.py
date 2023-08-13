@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''Module to test City class'''
 import unittest
-from models.city import City
+from models.review import Review
 from datetime import datetime
 
 
@@ -10,7 +10,7 @@ class TestCity(unittest.TestCase):
 
     def setUp(self):
         '''Set up instance to test City class'''
-        self.one = City()
+        self.one = Review()
 
     def tearDown(self):
         '''Destroy instance once tests are done'''
@@ -43,16 +43,19 @@ class TestCity(unittest.TestCase):
 
     def test_instantiation(self):
         '''Tests instantiation'''
-        self.assertTrue(self.one, City)
+        self.assertTrue(self.one, Review)
 
     def test_field_attributes(self):
         '''Tests field attributes of City class'''
-        self.one.state_id = "1234-1234"
-        self.one.name = "Durban"
-        self.assertEqual(self.one.state_id, "1234-1234")
-        self.assertEqual(self.one.name, "Durban")
-        self.assertTrue(isinstance(self.one.state_id, str))
-        self.assertTrue(isinstance(self.one.name, str))
+        self.one.place_id = "1234-1234"
+        self.one.user_id = "1234"
+        self.one.text = "Durban"
+        self.assertEqual(self.one.place_id, "1234-1234")
+        self.assertEqual(self.one.user_id, "1234")
+        self.assertEqual(self.one.text, "Durban")
+        self.assertTrue(isinstance(self.one.place_id, str))
+        self.assertTrue(isinstance(self.one.user_id, str))
+        self.assertTrue(isinstance(self.one.text, str))
         self.assertTrue(isinstance(self.one.id, str))
         self.assertTrue(isinstance(self.one.created_at, datetime))
         self.assertTrue(isinstance(self.one.updated_at, datetime))

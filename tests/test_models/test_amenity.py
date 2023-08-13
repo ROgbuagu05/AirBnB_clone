@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''Module to test City class'''
 import unittest
-from models.city import City
+from models.amenity import Amenity
 from datetime import datetime
 
 
@@ -10,7 +10,7 @@ class TestCity(unittest.TestCase):
 
     def setUp(self):
         '''Set up instance to test City class'''
-        self.one = City()
+        self.one = Amenity()
 
     def tearDown(self):
         '''Destroy instance once tests are done'''
@@ -43,15 +43,12 @@ class TestCity(unittest.TestCase):
 
     def test_instantiation(self):
         '''Tests instantiation'''
-        self.assertTrue(self.one, City)
+        self.assertTrue(self.one, Amenity)
 
     def test_field_attributes(self):
         '''Tests field attributes of City class'''
-        self.one.state_id = "1234-1234"
         self.one.name = "Durban"
-        self.assertEqual(self.one.state_id, "1234-1234")
         self.assertEqual(self.one.name, "Durban")
-        self.assertTrue(isinstance(self.one.state_id, str))
         self.assertTrue(isinstance(self.one.name, str))
         self.assertTrue(isinstance(self.one.id, str))
         self.assertTrue(isinstance(self.one.created_at, datetime))
