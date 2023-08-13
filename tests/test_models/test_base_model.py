@@ -68,10 +68,9 @@ class TestBase(unittest.TestCase):
         self.assertEqual(self.one.created_at, self.one.updated_at)
 
         # test created_at and updated_at when instance is created and
-        #+ after it is saved
+        # after it is saved
         original = self.one.created_at
         original2 = self.one.updated_at
         self.one.save()
         self.assertEqual(original, self.one.created_at)
         self.assertNotEqual(original2, self.one.updated_at)
-        
