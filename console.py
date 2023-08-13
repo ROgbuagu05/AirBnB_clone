@@ -42,19 +42,23 @@ class HBNBCommand(cmd.Cmd):
         # call do_* method based on class name found in (line)
         command = re.split(' ', args, 1)
         if command[0] in command_list:
-            if args.startswith(command_list[0]):
+            if command[0] == command_list[0]:
                 self.do_all(command[1])
-            elif args.startswith(command_list[1]):
+            elif command[0] == command_list[1]:
                 self.do_create(command[1])
-            elif args.startswith(command_list[2]):
+            elif command[0] == command_list[2]:
                 self.do_delete(command[1])
-            elif args.startswith(command_list[3]):
+            elif command[0] == command_list[3]:
                 self.do_show(command[1])
-            elif args.startswith(command_list[4]):
+            elif command[0] == command_list[4]:
                 self.do_update(command[1])
-            else:
+            elif command[0] == command_list[5]:
                 self.do_count(command[1])
-            return False
+            else:
+                print("*** Unknown syntax: {}".format(line))
+        else:
+            print("*** Unknown syntax: {}".format(line))
+        return False
 
     def do_quit(self, line):
         '''Do method to exit CLI'''

@@ -17,11 +17,16 @@ def cmd_parser(arg):
     class_list = ["Amenity", "BaseModel", "City", "Place", "Review",
                   "State", "User"]
 
+    # check for parenthesis in arg
+    flag = False
+    if "(" in arg and ")" in arg:
+        flag = True
+
     # Split class name from rest of argument
     arg_list = arg.split('.')
 
     # if a valid class name is not given, return 1
-    if arg_list[0] not in class_list:
+    if arg_list[0] not in class_list or flag == False:
         return (1)
 
     # if a valid class name was given, continue processing arg
