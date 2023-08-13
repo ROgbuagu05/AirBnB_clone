@@ -74,3 +74,6 @@ class TestBase(unittest.TestCase):
         self.one.save()
         self.assertEqual(original, self.one.created_at)
         self.assertNotEqual(original2, self.one.updated_at)
+
+if __name__ == "__main__":
+    unittest.main()
