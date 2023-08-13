@@ -9,7 +9,7 @@ def unquote(arg):
     marks from the end and beginning of string
 
     Args:
-        arg: A string object
+        arg: A list of string objects
 
     Returns:
         The arg string without double quotation marks at the beginning and
@@ -17,8 +17,10 @@ def unquote(arg):
     '''
     arg_one = ""
     arg_two = ""
+
+    # if arg[3] is a single word in quotes
     if arg[3].startswith('"') and arg[3].endswith('"'):
-        new = re.sub('"', '', arg)
+        new = re.sub('"', '', arg[3])
         return new
     elif arg[3].startswith('"'):
         arg_one = arg[3]
