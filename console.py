@@ -35,30 +35,30 @@ class HBNBCommand(cmd.Cmd):
         args = cmd_parser(line)
 
         # if there is no valid class name in (line) print error message
-        if args == 1:
-            print("*** Unknown syntax: {}".format(line))
-            return False
+        # if args == 1:
+        #   print("*** Unknown syntax: {}".format(line))
+        #   return False
 
         # call do_* method based on class name found in (line)
-        command = re.split(' ', args, 1)
-        if command[0] in command_list:
-            if command[0] == command_list[0]:
-                self.do_all(command[1])
-            elif command[0] == command_list[1]:
-                self.do_create(command[1])
-            elif command[0] == command_list[2]:
-                self.do_delete(command[1])
-            elif command[0] == command_list[3]:
-                self.do_show(command[1])
-            elif command[0] == command_list[4]:
-                self.do_update(command[1])
-            elif command[0] == command_list[5]:
-                self.do_count(command[1])
-            else:
-                print("*** Unknown syntax: {}".format(line))
-        else:
-            print("*** Unknown syntax: {}".format(line))
-        return False
+        if type(args) is str:
+            command = re.split(' ', args, 1)
+            if command[0] in command_list:
+                if command[0] == command_list[0]:
+                    self.do_all(command[1])
+                elif command[0] == command_list[1]:
+                    self.do_create(command[1])
+                elif command[0] == command_list[2]:
+                    self.do_delete(command[1])
+                elif command[0] == command_list[3]:
+                    self.do_show(command[1])
+                elif command[0] == command_list[4]:
+                    self.do_update(command[1])
+                elif command[0] == command_list[5]:
+                    self.do_count(command[1])
+            # else:
+                # print("*** Unknown syntax: {}".format(line))
+        # else:
+            # print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, line):
         '''Do method to exit CLI'''
