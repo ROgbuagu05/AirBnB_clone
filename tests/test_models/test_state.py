@@ -19,6 +19,22 @@ class TestState(unittest.TestCase):
         '''Test to see if class documentation exists'''
         self.assertTrue(self.one.__doc__)
 
+    def test_save_method(self):
+        '''Tests if the save method updates attr updated_at'''
+
+        val1 = self.one.updated_at
+        self.one.save()
+        self.assertNotEqual(val1, self.one.updated_at)
+
+    def test_to_dict_method(self):
+        '''Tests to_dict method'''
+
+        new_dict = self.one.to_dict()
+        self.assertTrue(isinstance(new_dict, dict))
+        self.assertTrue(isinstance(new_dict["created_at"], str))
+        self.assertTrue(isinstance(new_dict["updated_at"], str))
+        self.assertTrue(new_dict["__class__"])
+
     def test_instantiation(self):
         '''Tests instantiation'''
         self.assertTrue(isinstance(self.one, State))
